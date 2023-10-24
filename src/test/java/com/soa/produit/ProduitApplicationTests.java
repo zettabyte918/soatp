@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.soa.produit.Entities.Categorie;
 import com.soa.produit.Entities.Produit;
+import com.soa.produit.Repository.CategorieRepository;
 import com.soa.produit.Repository.ProduitRepository;
 
 @SpringBootTest
@@ -17,10 +18,15 @@ class ProduitApplicationTests {
 	@Autowired
 	private ProduitRepository produitRepository;
 
+	@Autowired
+	private CategorieRepository categeRepository;
+
 	@Test
 	public void testCreateProduit() {
 		Produit prod = new Produit("mac", 1500.500, new Date());
-
+		Categorie cat = new Categorie("new cat", "des cat");
+		categeRepository.save(cat);
+		prod.setCategorie(cat);
 		produitRepository.save(prod);
 	}
 
@@ -34,7 +40,7 @@ class ProduitApplicationTests {
 
 	@Test
 	public void testUpdateProduit() {
-		Produit p = produitRepository.findById(1).get();
+		Produit p = produitRepository.findById(1L).get();
 		p.setPrixProduit(2000.0);
 		produitRepository.save(p);
 		System.out.println(p);
