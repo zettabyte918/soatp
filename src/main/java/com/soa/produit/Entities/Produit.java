@@ -1,6 +1,5 @@
 package com.soa.produit.Entities;
 
-
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -10,37 +9,30 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-
-
 @Table
 @Entity
 public class Produit {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProduit;
-    private String nomProduit;
-    private double prixProduit;
-    private Date dateCreation;
-    
-    @ManyToOne
-    private Categorie categorie;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idProduit;
+	private String nomProduit;
+	private double prixProduit;
+	private Date dateCreation;
 
-    public Produit( String nomProduit, double prixProduit, Date dateCreation) {
-        this.nomProduit = nomProduit;
-        this.prixProduit = prixProduit;
-        this.dateCreation = dateCreation;
-    }
-    
-    
-    
-    public Produit() {
+	@ManyToOne
+	private Categorie categorie;
+
+	public Produit(String nomProduit, double prixProduit, Date dateCreation) {
+		this.nomProduit = nomProduit;
+		this.prixProduit = prixProduit;
+		this.dateCreation = dateCreation;
+	}
+
+	public Produit() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-
 
 	public Long getIdProduit() {
 		return idProduit;
@@ -82,14 +74,10 @@ public class Produit {
 		this.categorie = categorie;
 	}
 
-
-
-
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", prixProduit=" + prixProduit
-				+ ", dateCreation=" + dateCreation + ", categorie=" + categorie + "]";
+				+ ", dateCreation=" + dateCreation + "]";
 	}
-	
-	
+
 }

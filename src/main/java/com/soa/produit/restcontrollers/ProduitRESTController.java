@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.soa.produit.Entities.Categorie;
 import com.soa.produit.Entities.Produit;
 import com.soa.produit.Repository.ProduitRepository;
 import com.soa.produit.Service.ProduitService;
-
 
 @RestController
 @RequestMapping("/api")
@@ -17,11 +17,10 @@ public class ProduitRESTController {
 
     @Autowired
     private ProduitService produitService;
-    
+
     @Autowired
-    private ProduitRepository produitrepo; 
-    
-    
+    private ProduitRepository produitrepo;
+
     @GetMapping("")
     public List<Produit> getAllProduits() {
         return produitrepo.findAll();
@@ -32,28 +31,26 @@ public class ProduitRESTController {
         return produitService.getProduit(id);
     }
 
-    
     @PostMapping("/")
-    public Produit createProduit(@RequestBody Produit produit) {
+    public Produit createProduit(@RequestBody Produit produit, @RequestParam Long categorieId) {
+        Categorie cat = produitService.getCategorie(categorieId);
+        produit.setCategorie(cat);
         return produitService.saveProduit(produit);
     }
 
-    
     @PutMapping("")
     public Produit updateProduit(@RequestBody Produit produit) {
         return produitService.updateProduit(produit);
     }
-    
+
     @DeleteMapping("/{id}")
     public void deleteProduit(@PathVariable("id") Long id) {
         produitService.deleteProduitById(id);
     }
 
-    
     @GetMapping("/prodscat/{idCat}")
     public List<Produit> getProduitsByCatId(@PathVariable("idCat") Long idCat) {
         return produitService.findByCategorieIdCat(idCat);
     }
-    
-    
+
 }

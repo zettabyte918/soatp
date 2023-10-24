@@ -20,20 +20,21 @@ class ProduitApplicationTests {
 	@Test
 	public void testCreateProduit() {
 		Produit prod = new Produit("mac", 1500.500, new Date());
+
 		produitRepository.save(prod);
 	}
 
 	@Test
 	public void testFindProduit() {
-		Produit p = produitRepository.findById(2L).get();
-		// List<Produit> p=produitRepository.findAll();
+		// Produit p = produitRepository.findById(2L).get();
+		List<Produit> p = produitRepository.findAll();
 		System.out.println("*****************************");
 		System.out.println(p.toString());
 	}
 
 	@Test
 	public void testUpdateProduit() {
-		Produit p = produitRepository.findById(1L).get();
+		Produit p = produitRepository.findById(1).get();
 		p.setPrixProduit(2000.0);
 		produitRepository.save(p);
 		System.out.println(p);
